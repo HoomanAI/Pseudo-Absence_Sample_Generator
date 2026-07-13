@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- Project-specific: data & generated outputs ---
+data/*
+!data/.gitkeep
+!data/README.md
+outputs/*
+!outputs/.gitkeep
+*.npy
+gan_diagnostics_*.csv
+run_log_*.txt
+run_all_modes.log
+run_all_modes.sh

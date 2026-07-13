@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methodology Flowchart</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f1f5f9;
+    padding: 40px 24px 60px;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 48px 56px 56px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,.07), 0 20px 60px -10px rgba(0,0,0,.13);
+  }
+
+  /* TITLE */
+  .title-block { text-align: center; margin-bottom: 44px; }
+  .title-block .eyebrow {
+    display: inline-block;
+    background: #eff6ff; color: #1d4ed8;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 12px;
+  }
+  .title-block h1 { font-size: 22px; font-weight: 800; color: #0f172a; line-height: 1.25; }
+  .title-block h1 em { color: #e84040; font-style: normal; }
+
+  /* ── FLOWCHART LAYOUT ── */
+  .fc { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+  /* ARROW DOWN */
+  .arrow-down {
+    width: 2px; height: 32px;
+    background: #cbd5e1;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .arrow-down::after {
+    content: '';
+    position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #94a3b8;
+  }
+
+  .arrow-down.thick { background: #94a3b8; width: 2px; height: 36px; }
+
+  /* LABELED ARROW */
+  .arrow-labeled {
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+    flex-shrink: 0;
+  }
+  .arrow-labeled .arr-line {
+    width: 2px; background: #cbd5e1; flex: 1; min-height: 14px;
+  }
+  .arrow-labeled .arr-tag {
+    font-size: 9.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+    color: white; background: #64748b;
+    border-radius: 10px; padding: 2px 9px; margin: 2px 0;
+  }
+  .arrow-labeled .arr-head {
+    width: 0; height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #94a3b8;
+  }
+
+  /* BOXES */
+  .box {
+    border-radius: 12px;
+    border: 2px solid;
+    padding: 14px 20px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+  }
+  .box h3 { font-size: 13.5px; font-weight: 700; margin-bottom: 4px; }
+  .box p  { font-size: 11.5px; line-height: 1.5; }
+
+  /* DIAMOND (decision) */
+  .diamond-wrap {
+    width: 100%; max-width: 480px;
+    display: flex; justify-content: center;
+  }
+  .diamond {
+    position: relative;
+    width: 220px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .diamond::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: #fef3c7;
+    border: 2px solid #fcd34d;
+    transform: rotate(10deg) skewX(-10deg);
+    border-radius: 6px;
+  }
+  .diamond-inner {
+    position: relative; z-index: 1;
+    font-size: 12px; font-weight: 700; color: #78350f;
+    line-height: 1.35;
+  }
+
+  /* SPLIT / MERGE */
+  .split-row {
+    width: 100%; max-width: 720px;
+    display: flex; align-items: flex-start; justify-content: center; gap: 0;
+    position: relative;
+  }
+
+  /* Horizontal connector line above split */
+  .h-connector {
+    position: relative;
+    width: 100%; max-width: 520px;
+    height: 2px; background: #cbd5e1;
+    margin: 0 auto;
+  }
+  .h-connector::before, .h-connector::after {
+    content: '';
+    position: absolute; top: 0;
+    width: 0; height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #94a3b8;
+  }
+  .h-connector::before { left: 0; transform: translateX(-50%); top: -3px; }
+  .h-connector::after  { right: 0; transform: translateX(50%);  top: -3px; }
+
+  /* Branch column */
+  .branch-col {
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+    flex: 1; max-width: 300px;
+  }
+
+  /* Thin horizontal lines to branches */
+  .branch-h-line {
+    height: 2px; background: #cbd5e1;
+    flex-shrink: 0;
+  }
+
+  /* Merge line */
+  .merge-h {
+    width: 100%; max-width: 520px;
+    height: 2px; background: #cbd5e1;
+    margin: 0 auto;
+    position: relative;
+  }
+  .merge-h::after {
+    content: '';
+    position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #94a3b8;
+  }
+
+  /* COLOR THEMES */
+  .c-blue   { border-color: #93c5fd; background: #eff6ff; }
+  .c-blue   h3 { color: #1d4ed8; }
+  .c-blue   p  { color: #1e40af; }
+
+  .c-red    { border-color: #fca5a5; background: #fef2f2; }
+  .c-red    h3 { color: #b91c1c; }
+  .c-red    p  { color: #991b1b; }
+
+  .c-purple { border-color: #c4b5fd; background: #faf5ff; }
+  .c-purple h3 { color: #6d28d9; }
+  .c-purple p  { color: #5b21b6; }
+
+  .c-teal   { border-color: #5eead4; background: #f0fdfa; }
+  .c-teal   h3 { color: #0f766e; }
+  .c-teal   p  { color: #0d9488; }
+
+  .c-green  { border-color: #86efac; background: #f0fdf4; }
+  .c-green  h3 { color: #166534; }
+  .c-green  p  { color: #15803d; }
+
+  .c-orange { border-color: #fdba74; background: #fff7ed; }
+  .c-orange h3 { color: #c2410c; }
+  .c-orange p  { color: #9a3412; }
+
+  .c-dark   { border-color: #334155; background: #0f172a; }
+  .c-dark   h3 { color: #93c5fd; }
+  .c-dark   p  { color: rgba(255,255,255,0.75); }
+
+  /* PHASE CHIP */
+  .chip {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase;
+    padding: 2px 9px; border-radius: 20px; margin-bottom: 5px;
+  }
+
+  /* AUC chips inside boxes */
+  .auc-chip {
+    display: inline-block;
+    font-size: 14px; font-weight: 900;
+    padding: 2px 10px; border-radius: 8px; margin-top: 4px;
+  }
+
+  /* Spacer between split columns */
+  .split-spacer { width: 40px; flex-shrink: 0; align-self: stretch; position: relative; }
+  .split-spacer::before {
+    content: 'VS';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 10px; font-weight: 800; color: #94a3b8;
+    background: white; border: 1.5px solid #e2e8f0;
+    border-radius: 50%; width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0;
+  }
+
+  /* connector that ties split tops */
+  .split-top-line {
+    width: 100%; max-width: 560px;
+    display: flex; align-items: flex-start;
+    position: relative;
+  }
+  .stl-left, .stl-right {
+    flex: 1; height: 2px; background: #cbd5e1;
+    position: relative; top: 0;
+  }
+  .stl-down-l, .stl-down-r {
+    width: 2px; height: 20px; background: #cbd5e1;
+    position: relative;
+  }
+  .stl-down-l::after, .stl-down-r::after {
+    content: '';
+    position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid #94a3b8;
+  }
+  .stl-center { width: 2px; height: 0; }
+
+  /* branch-label tag floated above a branch */
+  .branch-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+    padding: 2px 10px; border-radius: 10px; margin-bottom: 6px;
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="title-block">
+    <div class="eyebrow">🔬 Research Methodology</div>
+    <h1>Wildfire Prediction with <em>Pseudo-Absence</em> Generation</h1>
+  </div>
+
+  <div class="fc">
+
+    <!-- 1. DATA COLLECTION -->
+    <div class="box c-blue" style="max-width:520px;">
+      <div class="chip" style="background:#dbeafe;color:#1d4ed8;">Phase 1</div>
+      <h3>📦 Data Collection</h3>
+      <p>Fire occurrence records (GPS ignition points) + environmental covariates<br>(vegetation, topography, climate) + study area definition</p>
+    </div>
+
+    <div class="arrow-down thick"></div>
+
+    <!-- 2. PREPROCESSING -->
+    <div class="box c-blue" style="max-width:520px;">
+      <div class="chip" style="background:#dbeafe;color:#1d4ed8;">Phase 2</div>
+      <h3>🔧 Data Preprocessing</h3>
+      <p>Spatial filtering · duplicate removal · raster alignment · covariate extraction at fire locations</p>
+    </div>
+
+    <div class="arrow-down thick"></div>
+
+    <!-- DECISION: Which strategy? -->
+    <div style="width:100%;max-width:520px;display:flex;justify-content:center;">
+      <div style="background:#fef3c7;border:2.5px solid #fcd34d;border-radius:10px;padding:14px 24px;text-align:center;transform:rotate(-1deg);">
+        <div style="font-size:11px;font-weight:800;color:#92400e;letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;">Decision</div>
+        <div style="font-size:13px;font-weight:700;color:#78350f;">Which pseudo-absence strategy?</div>
+      </div>
+    </div>
+
+    <!-- SPLIT TOP LINES -->
+    <div style="width:100%;max-width:580px;display:flex;align-items:flex-start;margin-top:0;">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:flex-end;">
+        <div style="height:20px;width:2px;background:#cbd5e1;"></div>
+        <div style="height:2px;width:100%;background:#cbd5e1;"></div>
+      </div>
+      <div style="width:2px;height:20px;background:#cbd5e1;"></div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:flex-start;">
+        <div style="height:20px;width:2px;background:#cbd5e1;"></div>
+        <div style="height:2px;width:100%;background:#cbd5e1;"></div>
+      </div>
+    </div>
+    <!-- Down arrows from split -->
+    <div style="width:100%;max-width:580px;display:flex;justify-content:space-between;">
+      <div style="width:2px;height:16px;background:#cbd5e1;position:relative;margin-left:0;">
+        <div style="position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #94a3b8;"></div>
+      </div>
+      <div style="width:2px;height:16px;background:#cbd5e1;position:relative;margin-right:0;">
+        <div style="position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #94a3b8;"></div>
+      </div>
+    </div>
+
+    <!-- PARALLEL BRANCHES -->
+    <div style="width:100%;max-width:620px;display:flex;gap:20px;align-items:flex-start;margin-top:6px;">
+
+      <!-- LEFT: RANDOM -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0;">
+        <div class="branch-tag" style="background:#fee2e2;color:#b91c1c;">Strategy A</div>
+        <div class="box c-red" style="max-width:100%;">
+          <h3>🎲 Random Placement</h3>
+          <p>Absence points drawn uniformly at random across the full study extent. No environmental constraints.</p>
+        </div>
+        <div class="arrow-down"></div>
+        <div class="box c-red" style="max-width:100%;border-style:dashed;">
+          <h3>⚠️ Quality Test (AUC)</h3>
+          <p>Secondary classifier easily separates fire vs. random controls</p>
+          <div class="auc-chip" style="background:#fca5a5;color:#7f1d1d;">AUC ≈ 0.90 ✗</div>
+        </div>
+        <div class="arrow-down"></div>
+        <div class="box c-red" style="max-width:100%;">
+          <h3>🚫 Biased Training Set</h3>
+          <p>Controls ≠ fire-prone conditions. Model learns trivial separation. Predictions are unreliable.</p>
+        </div>
+      </div>
+
+      <!-- DIVIDER -->
+      <div style="width:2px;background:#e2e8f0;align-self:stretch;border-radius:2px;flex-shrink:0;"></div>
+
+      <!-- RIGHT: GAN -->
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0;">
+        <div class="branch-tag" style="background:#ede9fe;color:#6d28d9;">Strategy B</div>
+        <div class="box c-purple" style="max-width:100%;">
+          <h3>🧠 Heuristic / GAN</h3>
+          <p>GAN trained on fire-location covariate vectors generates environmentally realistic absence candidates.</p>
+        </div>
+        <div class="arrow-down"></div>
+        <div class="box c-purple" style="max-width:100%;border-style:dashed;">
+          <h3>✅ Quality Test (AUC)</h3>
+          <p>Secondary classifier cannot separate fire vs. GAN controls</p>
+          <div class="auc-chip" style="background:#c4b5fd;color:#3b0764;">AUC ≈ 0.50 ✓</div>
+        </div>
+        <div class="arrow-down"></div>
+        <div class="box c-purple" style="max-width:100%;">
+          <h3>✅ Valid Training Set</h3>
+          <p>Controls ≈ fire-prone conditions. Model learns genuine risk signals. Predictions are ecologically valid.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MERGE BACK -->
+    <div style="width:100%;max-width:620px;display:flex;justify-content:space-between;margin-top:0;">
+      <div style="width:2px;height:20px;background:#cbd5e1;"></div>
+      <div style="width:2px;height:20px;background:#cbd5e1;"></div>
+    </div>
+    <div style="width:100%;max-width:580px;display:flex;align-items:flex-end;">
+      <div style="flex:1;height:2px;background:#cbd5e1;"></div>
+      <div style="width:2px;height:0;background:#cbd5e1;"></div>
+      <div style="flex:1;height:2px;background:#cbd5e1;"></div>
+    </div>
+    <div style="width:2px;height:20px;background:#cbd5e1;position:relative;">
+      <div style="position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid #94a3b8;"></div>
+    </div>
+
+    <!-- 5. MODEL TRAINING -->
+    <div class="box c-teal" style="max-width:520px;margin-top:6px;">
+      <div class="chip" style="background:#ccfbf1;color:#0f766e;">Phase 3</div>
+      <h3>🤖 Binary Classifier Training</h3>
+      <p>Fire presences + pseudo-absences → feature extraction → train / val / test split → model fitting (RF / XGBoost / DNN) — repeated for each strategy</p>
+    </div>
+
+    <div class="arrow-down thick"></div>
+
+    <!-- 6. EVALUATION -->
+    <div class="box c-green" style="max-width:520px;">
+      <div class="chip" style="background:#dcfce7;color:#166534;">Phase 4</div>
+      <h3>📊 Model Evaluation</h3>
+      <p>AUC-ROC · Precision / Recall · Feature importance · Spatial validity of fire risk maps — compared across both strategies</p>
+    </div>
+
+    <div class="arrow-down thick"></div>
+
+    <!-- 7. FIRE RISK MAP -->
+    <div class="box c-orange" style="max-width:520px;">
+      <div class="chip" style="background:#fed7aa;color:#c2410c;">Phase 5</div>
+      <h3>🗺️ Fire Risk Prediction Map</h3>
+      <p>Model applied pixel-by-pixel across full study area to produce a continuous fire probability surface [0 – 1]</p>
+    </div>
+
+    <div class="arrow-down thick"></div>
+
+    <!-- 8. CONCLUSION -->
+    <div class="box c-dark" style="max-width:520px;">
+      <div class="chip" style="background:#1e3a5f;color:#93c5fd;">Conclusion</div>
+      <h3>🏁 Key Finding</h3>
+      <p>GAN/heuristic pseudo-absences produce unbiased training data and significantly more reliable fire risk predictions than random placement.</p>
+    </div>
+
+  </div><!-- /fc -->
+</div><!-- /page -->
+</body>
+</html>

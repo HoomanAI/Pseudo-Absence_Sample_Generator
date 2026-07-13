@@ -1,0 +1,10 @@
+numpy
+pandas
+scipy
+scikit-learn
+shapely
+torch
+matplotlib
+openpyxl
+folium
+xgboost
