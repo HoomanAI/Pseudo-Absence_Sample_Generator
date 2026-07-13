@@ -5,6 +5,7 @@ scikit-learn
 shapely
 torch
 matplotlib
+pillow
 openpyxl
 folium
 xgboost
