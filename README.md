@@ -35,7 +35,7 @@ src/
   evaluation/   ML benchmarking and spatial evaluation of generated samples
   figures/      Plotting / reporting scripts that consume generation & evaluation outputs
   reporting/    Excel / Word report generators
-docs/           Methodology diagrams and result write-ups (HTML/Markdown)
+docs/           Methodology diagrams, result write-ups, and rendered figures (docs/figures/)
 data/           Place Fire_points_dataset_final_csv.csv here (not versioned, see data/README.md)
 outputs/        Generated .npy/.csv/.png artifacts land here (not versioned)
 ```
@@ -70,3 +70,27 @@ file timestamps which of these three scripts actually produced the pseudo-absenc
 in any previously reported results — all outputs shared identical copy timestamps and all three
 scripts wrote to the same hardcoded (and non-existent-here) output path. Confirm which script
 was actually run before citing results as coming from the feature-space method.
+
+## Evaluation results (DA-GP-WGAN vs. Heuristic / Random / SA / GAN)
+
+`src/evaluation/run_ml_da_gp_wgan.py` and `run_ml_ablation_arms.py` run the same 4-model
+(RandomForest, XGBoost, KNN, SVM), 5-fold spatial cross-validation used for the other methods
+against the domain-aware GP-WGAN's output and against the `clip` / `gp_standard` ablation arms.
+`src/figures/gen_figs_paper_v2.py` renders the full comparison — 40 figures plus 2 "with GAN"
+variants — into `docs/figures/`.
+
+**Honest summary of what the numbers actually show:**
+- DA-GP-WGAN has the best spatial fidelity of all 5 methods: lowest Ripley's K SSE (3.19 vs.
+  4.87 for plain GAN) and lowest border-clustering fraction (0.253 vs. 0.281).
+- It is **statistically tied with plain GAN on predictive accuracy** (SVM AUC 0.986 vs. 0.994,
+  bootstrap CI includes 0) — not superior. RF/XGBoost AUC are saturated at ~1.000 for every
+  method and are not a meaningful ranking signal (see `fig28`/`fig30`/`fig32` for the
+  correction of an earlier normalization bug that made a statistically-flat RF-AUC column look
+  like a real gap).
+- The 3-way ablation (`fig36`) shows most of the spatial-fidelity gain comes from adding a
+  gradient penalty *at all* (clip → GP-standard); the domain-aware weighting on top of a plain
+  gradient penalty is roughly neutral in this run (K-SSE ties, border fraction is marginally
+  higher than GP-standard). This is reported as measured, not adjusted to fit a cleaner story.
+- Two figures are intentionally incomplete rather than fabricated: `fig37`'s critic-weight
+  panel (trained critic weights were never persisted to disk) and `fig38`'s λ_GP × τ
+  sensitivity heatmap (the hyperparameter sweep has not been run).
