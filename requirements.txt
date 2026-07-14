@@ -6,6 +6,5 @@ shapely
 torch
 matplotlib
 pillow
-openpyxl
-folium
 xgboost
+umap-learn

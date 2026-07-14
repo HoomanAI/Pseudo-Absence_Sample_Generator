@@ -33,9 +33,8 @@ This repository provides a flexible framework for creating and evaluating pseudo
 src/
   generation/   Pseudo-absence generation methods (GAN, simulated annealing, random, heuristic)
   evaluation/   ML benchmarking and spatial evaluation of generated samples
-  figures/      Plotting / reporting scripts that consume generation & evaluation outputs
-  reporting/    Excel / Word report generators
-docs/           Methodology diagrams, result write-ups, and rendered figures (docs/figures/)
+  figures/      Plotting scripts that reproduce the paper's figures from generation & evaluation outputs
+docs/           Methodology diagrams and rendered figures (docs/figures/)
 data/           Place Fire_points_dataset_final_csv.csv here (not versioned, see data/README.md)
 outputs/        Generated .npy/.csv/.png artifacts land here (not versioned)
 ```
