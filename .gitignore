@@ -227,4 +227,3 @@ outputs/*
 gan_diagnostics_*.csv
 run_log_*.txt
 run_all_modes.log
-run_all_modes.sh
