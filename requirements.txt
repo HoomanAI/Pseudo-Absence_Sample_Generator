@@ -1,10 +1,11 @@
-numpy
-pandas
-scipy
-scikit-learn
-shapely
-torch
-matplotlib
-pillow
-xgboost
-umap-learn
+# Pinned to the versions reported in Appendix C of the manuscript.
+# Relax the pins if your platform has no wheel for a given version.
+numpy==2.4.6
+pandas==3.0.3
+scipy==1.18.0
+scikit-learn==1.9.0
+torch==2.12.1
+xgboost==3.3.0
+matplotlib>=3.8
+cairosvg>=2.7        # only needed by src/figures/make_arch_figure.py
+openpyxl>=3.1        # only needed to read the Quebec workbook

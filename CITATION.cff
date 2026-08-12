@@ -1,0 +1,55 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "AP-WGAN: Admissibility-Preserving Pseudo-Absence Generation"
+abstract: >-
+  Reference implementation of AP-WGAN, an admissibility-preserving Wasserstein
+  GAN whose ordinal output heads emit only covariate values permitted by a
+  reclassification scheme, together with the admissibility diagnostic and the
+  evaluation gate described in the accompanying paper.
+type: software
+license: MIT
+authors:
+  - family-names: Razavi
+    given-names: Hooman
+    affiliation: "Department of Civil Engineering, University of Ottawa, Ottawa, ON, Canada"
+  - family-names: Bonakdari
+    given-names: Hossein
+    email: hbonakda@uottawa.ca
+    affiliation: "Department of Civil Engineering, University of Ottawa, Ottawa, ON, Canada"
+  - family-names: Zaji
+    given-names: Amir Hossein
+    affiliation: "MSE Department, University Canada West, Vancouver, BC, Canada"
+  - family-names: Mozaffari
+    given-names: M. Hamed
+    affiliation: "Construction Research Centre, National Research Council Canada, Ottawa, ON, Canada"
+  - family-names: Bénichou
+    given-names: Noureddine
+    affiliation: "Construction Research Centre, National Research Council Canada, Ottawa, ON, Canada"
+keywords:
+  - pseudo-absence sampling
+  - positive-unlabelled learning
+  - knowledge-constrained generation
+  - Wasserstein GAN
+  - ordinal covariates
+  - construction artifact
+  - wildfire susceptibility
+preferred-citation:
+  type: article
+  title: >-
+    Knowledge-Constrained Generation of Synthetic Negatives:
+    Admissibility-Preserving Pseudo-Absence Sampling for Presence-Only
+    Wildfire Modeling
+  journal: "Knowledge-Based Systems"
+  year: 2026
+  notes: "Under review"
+  authors:
+    - family-names: Razavi
+      given-names: Hooman
+    - family-names: Bonakdari
+      given-names: Hossein
+    - family-names: Zaji
+      given-names: Amir Hossein
+    - family-names: Mozaffari
+      given-names: M. Hamed
+    - family-names: Bénichou
+      given-names: Noureddine
